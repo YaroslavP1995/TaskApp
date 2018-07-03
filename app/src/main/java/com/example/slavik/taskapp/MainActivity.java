@@ -19,16 +19,21 @@ public class MainActivity extends FragmentActivity {
 
     private int counter;
     static final String TAG = "myLogs";
-    static final int PAGE_COUNT = 10;
+    int PAGE_COUNT = 1;
+    //int page = 1;
     private ViewPager pager;
+    MyFragmentPagerAdapter myFragmentPagerAdapter;
+    //PagerAdapter pagerAdapter;
+    //клас пейдж и пейдж намбер
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         pager = findViewById(R.id.pager);
-        PagerAdapter pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
-        pager.setAdapter(pagerAdapter);
+
+        myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(myFragmentPagerAdapter);
 
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -44,6 +49,12 @@ public class MainActivity extends FragmentActivity {
             }
         });
     }
+    //фрагмент не правильно
+    //в онстарты гет интент якщо ынтент
+    //зробити лыст ынтегерыв який рывен 1
+    //повысити на оклыыыки лыстенери listAdd  лыст сайз збыльшкувати зменшувати
+    //getCount
+    //
     @Override
     public void onBackPressed() {
         if (pager.getCurrentItem() == 0) {
@@ -54,17 +65,26 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void plusFragment(View v){
-        pager.setCurrentItem(pager.getCurrentItem() + 1 );
+        PAGE_COUNT++ ;
+        myFragmentPagerAdapter.notifyDataSetChanged();
+        pager.setCurrentItem(PAGE_COUNT);
+
     }
     public void minusFragment(View v){
-        pager.setCurrentItem(pager.getCurrentItem() - 1 );
+        PAGE_COUNT--;
+        myFragmentPagerAdapter.notifyDataSetChanged();
+        pager.setCurrentItem(PAGE_COUNT);
     }
 
     public void showNotification(View v){
 
         int count = (pager.getCurrentItem()+1);
+
         Intent notificationIntent = new Intent(this,MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationIntent.putExtra("DO",count);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0,notificationIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+
         Resources resources = this.getResources();
 
         NotificationCompat.Builder build = new NotificationCompat.Builder(this);
@@ -80,6 +100,18 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Log.d(TAG, "shiva said right");
+        intent = getIntent();
+        int actions = intent.getIntExtra("DO",0);
+        if (actions != 0) {
+            Log.d(TAG, "shiva said ");
+            pager.setCurrentItem(actions);
+        }
+        super.onNewIntent(intent);
+    }
+
    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
        MyFragmentPagerAdapter(FragmentManager fm) {
            super(fm);
@@ -89,9 +121,13 @@ public class MainActivity extends FragmentActivity {
        public Fragment getItem(int position) {
            switch (position) {
                case 0:
-                   return FragmentOne.newInstance(position+1);
+                   return FragmentOne.newInstance(position);
            }
-           return FragmentTwo.newInstance(position+1);
+           return FragmentTwo.newInstance(position);
+       }
+       @Override
+       public int getItemPosition(Object object) {
+           return PagerAdapter.POSITION_NONE;
        }
 
        @Override
