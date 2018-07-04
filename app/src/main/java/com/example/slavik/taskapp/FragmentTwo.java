@@ -8,10 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * Created by Slavik on 28.06.2018.
- */
-
 public class FragmentTwo extends Fragment {
 
     public static final String ARGUMENT_PAGE_NUMBER = "arg_page_number_two";
@@ -38,6 +34,5 @@ public class FragmentTwo extends Fragment {
         TextView textView = view.findViewById(R.id.numFragments);
         textView.setText(""+pageNumber);
         return view;
-
     }
 }

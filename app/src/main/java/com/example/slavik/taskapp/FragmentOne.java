@@ -8,14 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * Created by Slavik on 27.06.2018.
- */
-
 public class FragmentOne extends Fragment {
 
     public static final String ARGUMENT_PAGE_NUMBER = "arg_page_number";
-    private  int pageNumber = 1;
+    private  int pageNumber ;
 
     static FragmentOne newInstance(int page) {
         FragmentOne fragmentOne = new  FragmentOne();
