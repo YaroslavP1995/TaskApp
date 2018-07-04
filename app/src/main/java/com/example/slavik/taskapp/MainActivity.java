@@ -100,9 +100,9 @@ public class MainActivity extends FragmentActivity {
        public Fragment getItem(int position) {
            switch (position) {
                case 0:
-                   return FragmentOne.newInstance(PAGE_COUNT);
+                   return FragmentOne.newInstance(position);
            }
-           return FragmentTwo.newInstance(PAGE_COUNT);
+           return FragmentTwo.newInstance(position);
        }
 
        @Override

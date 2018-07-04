@@ -32,7 +32,7 @@ public class FragmentOne extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_1,null);
         TextView numOfPage = view.findViewById(R.id.numFragments);
-        numOfPage.setText(""+pageNumber);
+        numOfPage.setText(""+(pageNumber+1));
         return view;
     }
 }
