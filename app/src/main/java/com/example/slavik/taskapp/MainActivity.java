@@ -12,20 +12,21 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements FragmentOne.OnFragment1DataListener
+{
 
     private int counter;
-    int PAGE_COUNT = 1;
     private ViewPager pager;
     private static final String KEY_COUNT = "DO";
+    int PAGE_COUNT = 1;
     MyFragmentPagerAdapter myFragmentPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         pager = findViewById(R.id.pager);
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(myFragmentPagerAdapter);
@@ -52,19 +53,19 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    public void plusFragment(View v){
+    public void plusFragment(){
         PAGE_COUNT++ ;
         myFragmentPagerAdapter.notifyDataSetChanged();
         pager.setCurrentItem(PAGE_COUNT);
 
     }
-    public void minusFragment(View v){
+    public void minusFragment(){
         PAGE_COUNT--;
         myFragmentPagerAdapter.notifyDataSetChanged();
         pager.setCurrentItem(PAGE_COUNT);
     }
 
-    public void showNotification(View v){
+    public void showNotification(){
         int count = (pager.getCurrentItem());
         Intent notificationIntent = new Intent(this,MainActivity.class);
         notificationIntent.putExtra(KEY_COUNT, count);
@@ -91,18 +92,30 @@ public class MainActivity extends FragmentActivity {
         super.onNewIntent(intent);
     }
 
-   private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public void onFragment1DataListener(int i) {
+        switch (i){
+            case 1:
+                plusFragment();
+                //
+                break;
+            case 2:
+                minusFragment();
+                break;
+            case 3:
+                showNotification();
+                break;
+        }
+
+    }
+    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
        MyFragmentPagerAdapter(FragmentManager fm) {
            super(fm);
        }
 
        @Override
        public Fragment getItem(int position) {
-           switch (position) {
-               case 0:
-                   return FragmentOne.newInstance(position);
-           }
-           return FragmentTwo.newInstance(position);
+           return FragmentOne.newInstance(position);
        }
 
        @Override

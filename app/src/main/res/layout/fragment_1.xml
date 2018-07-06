@@ -1,72 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:layout_marginBottom="10dp"
-    android:id="@+id/fragmentOne">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="UselessParent">
+    android:layout_height="match_parent"
+    android:id="@+id/fragmentOneID">
 
         <ImageView
-            android:id="@+id/create_new_notification"
+            android:id="@+id/create_new_notificationID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="60dp"
-            android:contentDescription="@string/you_create_a_notification"
-            android:onClick="showNotification"
-            android:src="@mipmap/create_new" />
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            />
 
         <TextView
-            android:id="@+id/text_notification"
+            android:id="@+id/text_notificationID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="60dp"
+            android:layout_centerInParent="true"
             android:text="@string/text_create_notification"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite" />
 
         <ImageView
-            android:id="@+id/rectangle"
+            android:id="@+id/rectangleID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="230dp"
-            android:src="@mipmap/rectangle" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:src="@mipmap/rectangle"
+             />
 
         <ImageView
-            android:id="@+id/button_bg_plus"
+            android:id="@+id/buttonBgPlusID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="140dp"
-            android:layout_marginTop="230dp"
             android:contentDescription="@string/plus"
-            android:src="@mipmap/button_bg"
-            android:onClick="plusFragment"/>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="45dp"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            />
 
         <ImageView
-            android:id="@+id/image_plus"
+            android:id="@+id/buttonBgMinusID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="230dp"
-            android:layout_marginLeft="140dp"
-            android:contentDescription="@string/plus"
-            android:src="@mipmap/plus" />
+            android:contentDescription="@string/minus"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="45dp"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            />
 
         <TextView
-            android:id="@+id/numFragments"
+            android:id="@+id/numFragmentsID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="230dp"
             android:text=""
-            android:textColor="@color/colorPrimary"/>
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="55dp"
+            android:layout_centerInParent="true"
+             />
 
-    </FrameLayout>
-</LinearLayout>
+</RelativeLayout>
